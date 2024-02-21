@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 09:20 AM
+-- Generation Time: Feb 21, 2024 at 10:37 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -90,8 +90,10 @@ CREATE TABLE `tblbooks` (
 --
 
 INSERT INTO `tblbooks` (`id`, `BookName`, `CatId`, `AuthorId`, `ISBNNumber`, `BookPrice`, `RegDate`, `UpdationDate`) VALUES
-(1, 'PHP And MySql programming', 5, 1, 222333, 20, '2017-07-08 20:04:55', '2017-07-15 05:54:41'),
-(3, 'Physics', 6, 4, 1111, 15, '2017-07-08 20:17:31', '2024-02-21 07:40:38');
+(1, 'PHP And MySql programming', 5, 3, 794976, 0, '2017-07-08 20:04:55', '2024-02-21 09:06:39'),
+(3, 'Physics', 6, 4, 102027, 0, '2017-07-08 20:17:31', '2024-02-21 09:06:24'),
+(4, 'Java Programming', 5, 1, 995758, 0, '2024-02-21 09:06:00', '2024-02-21 09:06:29'),
+(5, 'Harry Potter and the Sorcerer\'s Stone', 8, 2, 709612, 0, '2024-02-21 09:08:09', '2024-02-21 09:08:19');
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,8 @@ INSERT INTO `tblcategory` (`id`, `CategoryName`, `Status`, `CreationDate`, `Upda
 (4, 'Romantic', 1, '2017-07-04 18:35:25', '2017-07-06 16:00:42'),
 (5, 'Technology', 1, '2017-07-04 18:35:39', '2017-07-08 17:13:03'),
 (6, 'Science', 1, '2017-07-04 18:35:55', '0000-00-00 00:00:00'),
-(7, 'Management', 0, '2017-07-04 18:36:16', '0000-00-00 00:00:00');
+(7, 'Management', 0, '2017-07-04 18:36:16', '0000-00-00 00:00:00'),
+(8, 'Fiction', 1, '2024-02-21 09:07:34', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -238,13 +241,13 @@ ALTER TABLE `tblauthors`
 -- AUTO_INCREMENT for table `tblbooks`
 --
 ALTER TABLE `tblbooks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblcategory`
 --
 ALTER TABLE `tblcategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tblissuedbookdetails`
