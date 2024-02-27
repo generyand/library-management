@@ -62,7 +62,7 @@ if (strlen($_SESSION['alogin']) == 0) {
             <div class="container">
                 <div class="row pad-botm">
                     <div class="col-md-12">
-                        <h4 class="header-line">Manage Registered Students</h4>
+                        <h4 class="header-line">Top Borrowers</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -70,7 +70,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                         <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Registered Students
+                                Registered Top Borrowers
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -82,41 +82,39 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <th>Student Name</th>
                                                 <th>Email </th>
                                                 <th>Mobile Number</th>
-                                                <th>Registration Date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>Book Quantity Borrowed</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $sql = "SELECT * from tblstudents";
+                                            <?php $sql = "
+                                                SELECT
+                                                    StudentID,
+                                                    FullName,
+                                                    EmailID,
+                                                    MobileNumber,
+                                                    COUNT(*) AS booksBorrowed
+                                                FROM
+                                                    tblissuedbookdetails
+                                                LEFT JOIN tblstudents USING(StudentId)
+                                                GROUP BY
+                                                    StudentId
+                                                ORDER BY
+                                                    COUNT(*)
+                                                DESC       
+                                            ";
                                             $query = $dbh->prepare($sql);
                                             $query->execute();
                                             $results = $query->fetchAll(PDO::FETCH_OBJ);
                                             $cnt = 1;
                                             if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) {               ?>
+                                                foreach ($results as $result) {?>
                                                     <tr class="odd gradeX">
                                                         <td class="center"><?php echo htmlentities($cnt); ?></td>
-                                                        <td class="center"><?php echo htmlentities($result->StudentId); ?></td>
+                                                        <td class="center"><?php echo htmlentities($result->StudentID); ?></td>
                                                         <td class="center"><?php echo htmlentities($result->FullName); ?></td>
-                                                        <td class="center"><?php echo htmlentities($result->EmailId); ?></td>
+                                                        <td class="center"><?php echo htmlentities($result->EmailID); ?></td>
                                                         <td class="center"><?php echo htmlentities($result->MobileNumber); ?></td>
-                                                        <td class="center"><?php echo htmlentities($result->RegDate); ?></td>
-                                                        <td class="center"><?php if ($result->Status == 1) {
-                                                                                echo htmlentities("Active");
-                                                                            } else {
-                                                                                echo htmlentities("Blocked");
-                                                                            }
-                                                                            ?></td>
-                                                        <td class="center">
-                                                            <?php if ($result->Status == 1) { ?>
-                                                                <a href="reg-students.php?inid=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to block this student?');"" >  <button class=" btn btn-danger"> Inactive</button>
-                                                                <?php } else { ?>
-
-                                                                    <a href="reg-students.php?id=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to active this student?');""><button class=" btn btn-primary"> Active</button>
-                                                                    <?php } ?>
-
-                                                        </td>
+                                                        <td class="center"><?php echo htmlentities($result->booksBorrowed); ?></td>
                                                     </tr>
                                             <?php $cnt = $cnt + 1;
                                                 }
