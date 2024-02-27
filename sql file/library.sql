@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2024 at 02:56 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Feb 27, 2024 at 09:08 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -146,9 +146,7 @@ CREATE TABLE `tblissuedbookdetails` (
 --
 
 INSERT INTO `tblissuedbookdetails` (`id`, `BookId`, `StudentID`, `IssuesDate`, `ReturnDate`, `RetrunStatus`, `fine`) VALUES
-(1, 1, 'SID002', '2024-01-15 06:09:47', '2024-01-15 11:15:20', 1, 0),
 (2, 1, 'SID002', '2024-01-15 06:12:27', '2024-01-15 11:15:23', 1, 5),
-(3, 3, 'SID002', '2023-07-15 06:13:40', NULL, 0, NULL),
 (4, 3, 'SID002', '2024-01-15 06:23:23', '2024-01-15 11:22:29', 1, 2),
 (5, 1, 'SID009', '2024-01-15 10:59:26', NULL, 0, NULL),
 (6, 3, 'SID011', '2024-01-15 18:02:55', NULL, 0, NULL),
@@ -178,7 +176,7 @@ CREATE TABLE `tblstudents` (
 
 INSERT INTO `tblstudents` (`id`, `StudentId`, `FullName`, `EmailId`, `MobileNumber`, `Password`, `Status`, `RegDate`, `UpdationDate`) VALUES
 (1, 'SID002', 'Gene Ryan Depalubos', 'depalubos@gmail.com', '09986359674', 'f925916e2754e5e03f75dd58a5733251', 1, '2017-07-11 15:37:05', '2024-02-21 07:39:22'),
-(4, 'SID005', 'Vincent Ace Rivera', 'rivera@gmail.com', '09932072911', '92228410fc8b872914e023160cf4ae8f', 0, '2017-07-11 15:41:27', '2024-02-21 07:39:28'),
+(4, 'SID005', 'Vincent Ace Rivera', 'rivera@gmail.com', '09932072911', '92228410fc8b872914e023160cf4ae8f', 0, '2017-07-11 15:41:27', '2024-02-27 07:55:53'),
 (8, 'SID009', 'Asnari Pacalna', 'pacalna@gmail.com', '09151494842', 'f925916e2754e5e03f75dd58a5733251', 1, '2017-07-11 15:58:28', '2024-02-21 07:39:33'),
 (9, 'SID010', 'Fernyl Jean Maningo', 'maningo@gmail.com', '09582377313', 'f925916e2754e5e03f75dd58a5733251', 1, '2017-07-15 13:40:30', '2024-02-21 07:39:38'),
 (10, 'SID011', 'Rogene Carl Rosalijos', 'rosalijos@gmail.com', '09419167578', 'f925916e2754e5e03f75dd58a5733251', 1, '2017-07-15 18:00:59', '2024-02-21 07:39:47'),
