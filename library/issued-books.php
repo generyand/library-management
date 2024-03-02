@@ -47,7 +47,7 @@ if (strlen($_SESSION['login']) == 0) {
             <div class="container">
                 <div class="row pad-botm">
                     <div class="col-md-12">
-                        <h4 class="header-line">Manage Issued Books</h4>
+                        <h4 class="header-line">Issued Books</h4>
                     </div>
 
 
@@ -67,7 +67,7 @@ if (strlen($_SESSION['login']) == 0) {
                                                     <th>Book Name</th>
                                                     <th>ISBN </th>
                                                     <th>Issued Date</th>
-                                                    <!-- <th>Due Date</th> -->
+                                                    <th>Due Date</th>
                                                     <th>Return Date</th>
                                                     <th>Fine (in PHP)</th>
                                                 </tr>
@@ -75,12 +75,25 @@ if (strlen($_SESSION['login']) == 0) {
                                             <tbody>
                                                 <?php
                                                 $sid = $_SESSION['stdid'];
-                                                $sql = "SELECT tblbooks.BookName,tblbooks.ISBNNumber,tblissuedbookdetails.IssuesDate,tblissuedbookdetails.ReturnDate,tblissuedbookdetails.id as rid,tblissuedbookdetails.fine from  tblissuedbookdetails join tblstudents on tblstudents.StudentId=tblissuedbookdetails.StudentId join tblbooks on tblbooks.id=tblissuedbookdetails.BookId where tblstudents.StudentId=:sid order by tblissuedbookdetails.id desc";
+                                                $sql = "
+                                                    SELECT tblbooks.BookName,
+                                                        tblbooks.ISBNNumber,
+                                                        tblissuedbookdetails.IssuesDate,
+                                                        tblissuedbookdetails.DueDate,
+                                                        tblissuedbookdetails.ReturnDate,
+                                                        tblissuedbookdetails.id AS rid,
+                                                        tblissuedbookdetails.fine
+                                                    FROM tblissuedbookdetails 
+                                                    JOIN tblstudents ON tblstudents.StudentId=tblissuedbookdetails.StudentId 
+                                                    JOIN tblbooks ON tblbooks.id=tblissuedbookdetails.BookId 
+                                                    WHERE tblstudents.StudentId=:sid
+                                                    ORDER BY tblissuedbookdetails.id DESC";
                                                 $query = $dbh->prepare($sql);
                                                 $query->bindParam(':sid', $sid, PDO::PARAM_STR);
                                                 $query->execute();
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
                                                 $cnt = 1;
+
                                                 if ($query->rowCount() > 0) {
                                                     foreach ($results as $result) {               ?>
                                                         <tr class="odd gradeX">
@@ -88,10 +101,10 @@ if (strlen($_SESSION['login']) == 0) {
                                                             <td class="center"><?php echo htmlentities($result->BookName); ?></td>
                                                             <td class="center"><?php echo htmlentities($result->ISBNNumber); ?></td>
                                                             <td class="center"><?php echo htmlentities($result->IssuesDate); ?></td>
-                                                            <!-- Add a Due Date Here -->
+                                                            <td class="center"><?php echo htmlentities($result->DueDate); ?></td>
                                                             <td class="center"><?php if ($result->ReturnDate == "") { ?>
                                                                     <span style="color:red">
-                                                                        <?php echo htmlentities("Not Return Yet"); ?>
+                                                                        <?php echo htmlentities("Not Returned Yet"); ?>
                                                                     </span>
                                                                 <?php } else {
                                                                                     echo htmlentities($result->ReturnDate);

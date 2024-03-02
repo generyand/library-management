@@ -9,7 +9,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     if (isset($_POST['issue'])) {
         $studentid = strtoupper($_POST['studentid']);
         $bookid = $_POST['bookdetails'];
-        $sql = "INSERT INTO  tblissuedbookdetails(StudentID,BookId) VALUES(:studentid,:bookid)";
+        $sql = "INSERT INTO tblissuedbookdetails(StudentID,BookId,IssuesDate, DueDate) VALUES(:studentid,:bookid,CURRENT_TIMESTAMP(), DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 2 DAY))";
         $query = $dbh->prepare($sql);
         $query->bindParam(':studentid', $studentid, PDO::PARAM_STR);
         $query->bindParam(':bookid', $bookid, PDO::PARAM_STR);
@@ -144,7 +144,7 @@ if (strlen($_SESSION['alogin']) == 0) {
             <!-- BOOTSTRAP SCRIPTS  -->
             <script src="assets/js/bootstrap.js"></script>
             <!-- CUSTOM SCRIPTS  -->
-            <script src="assets/js/custom.js"></script> asdfasdasdf
+            <script src="assets/js/custom.js"></script>
 
     </body>
 

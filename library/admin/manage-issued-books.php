@@ -59,8 +59,6 @@ if (strlen($_SESSION['alogin']) == 0) {
                             </div>
                         <?php } ?>
 
-
-
                         <?php if ($_SESSION['delmsg'] != "") { ?>
                             <div class="col-md-6">
                                 <div class="alert alert-success">
@@ -92,12 +90,25 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <th>Book Name</th>
                                                 <th>ISBN </th>
                                                 <th>Issued Date</th>
+                                                <th>Due Date</th>
                                                 <th>Return Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $sql = "SELECT tblstudents.FullName,tblbooks.BookName,tblbooks.ISBNNumber,tblissuedbookdetails.IssuesDate,tblissuedbookdetails.ReturnDate,tblissuedbookdetails.id as rid from  tblissuedbookdetails join tblstudents on tblstudents.StudentId=tblissuedbookdetails.StudentId join tblbooks on tblbooks.id=tblissuedbookdetails.BookId order by tblissuedbookdetails.id desc";
+                                            <?php $sql = "
+                                                    SELECT
+                                                        tblstudents.FullName,
+                                                        tblbooks.BookName,
+                                                        tblbooks.ISBNNumber,
+                                                        tblissuedbookdetails.IssuesDate,
+                                                        tblissuedbookdetails.DueDate,
+                                                        tblissuedbookdetails.ReturnDate,
+                                                        tblissuedbookdetails.id AS rid 
+                                                    FROM tblissuedbookdetails
+                                                    JOIN tblstudents ON tblstudents.StudentId=tblissuedbookdetails.StudentId
+                                                    JOIN tblbooks ON tblbooks.id=tblissuedbookdetails.BookId
+                                                    ORDER BY tblissuedbookdetails.id DESC";
                                             $query = $dbh->prepare($sql);
                                             $query->execute();
                                             $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -110,6 +121,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                         <td class="center"><?php echo htmlentities($result->BookName); ?></td>
                                                         <td class="center"><?php echo htmlentities($result->ISBNNumber); ?></td>
                                                         <td class="center"><?php echo htmlentities($result->IssuesDate); ?></td>
+                                                        <td class="center"><?php echo htmlentities($result->DueDate); ?></td>
                                                         <td class="center"><?php if ($result->ReturnDate == "") {
                                                                                 echo htmlentities("Not Returned Yet");
                                                                             } else {
@@ -117,9 +129,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                                             }
                                                                             ?></td>
                                                         <td class="center">
-
-                                                            <a href="update-issue-bookdeails.php?rid=<?php echo htmlentities($result->rid); ?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button>
-
+                                                            <a href="update-issue-bookdeails.php?rid=<?php echo htmlentities($result->rid); ?>"><button class="btn btn-primary"><i class="fa fa-edit"></i></button>
                                                         </td>
                                                     </tr>
                                             <?php $cnt = $cnt + 1;
