@@ -164,21 +164,26 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <div class="form-group">
                                                     <label>Fine (in PHP) :</label>
                                                     <?php
-                                                        date_default_timezone_set("Asia/Singapore");
-                                                        $dueDate = $result->DueDate;
-                                                        $now = date("Y-m-d h:i:s"); // status  date
+                                                    date_default_timezone_set("Asia/Singapore");
+                                                    $dueDate = $result->DueDate;
+                                                    $now = date("Y-m-d h:i:s"); // status  date
 
-                                                        $dteStart = new DateTime($dueDate);
-                                                        $dteEnd   = new DateTime($now);
+                                                    $dteStart = new DateTime($dueDate);
+                                                    $dteEnd   = new DateTime($now);
 
-                                                        $dteDiff  = $dteStart->diff($dteEnd);
-                                                        $fine = (int) $dteDiff->format("%R%a") * 25;
-                                                        
-                                                        echo $fine;
+                                                    /* To test for overdue fines */
+                                                    // $dteStart = new DateTime($now);
+                                                    // $dteEnd   = new DateTime($dueDate);
+
+                                                    $dteDiff  = $dteStart->diff($dteEnd);
+
+                                                    $fine = (int) $dteDiff->format("%R%a") * 25;
+
+                                                    if ($fine <= 0) $fine = 0;
                                                     ?>
+                                                    <input class="form-control" value="<?php echo $fine ?>" type="text" name="fine" id="fine" required readonly />
                                                 </div>
                                                 <?php if ($result->RetrunStatus == 0) { ?>
-
                                                     <button type="submit" name="return" id="submit" class="btn btn-info">Return Book </button>
 
                                 </div>
