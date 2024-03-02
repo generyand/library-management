@@ -144,7 +144,7 @@ if (strlen($_SESSION['alogin']) == 0) {
             <!-- BOOTSTRAP SCRIPTS  -->
             <script src="assets/js/bootstrap.js"></script>
             <!-- CUSTOM SCRIPTS  -->
-            <script src="assets/js/custom.js"></script>
+            <script src="assets/js/custom.js"></script> asdfasdasdf
 
     </body>
 
