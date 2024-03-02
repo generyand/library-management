@@ -124,9 +124,6 @@ if (strlen($_SESSION['alogin']) == 0) {
                                         if ($query->rowCount() > 0) {
                                             foreach ($results as $result) {               ?>
 
-
-
-
                                                 <div class="form-group">
                                                     <label>Student Name:</label>
                                                     <?php echo htmlentities($result->FullName); ?>
@@ -159,8 +156,6 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                     <?php if ($result->ReturnDate == "") {
                                                         echo htmlentities("Not Returned Yet");
                                                     } else {
-
-
                                                         echo htmlentities($result->ReturnDate);
                                                     }
                                                     ?>
@@ -169,12 +164,17 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <div class="form-group">
                                                     <label>Fine (in PHP) :</label>
                                                     <?php
-                                                    if ($result->fine == "") { ?>
-                                                        <input class="form-control" type="text" name="fine" id="fine" required />
+                                                        date_default_timezone_set("Asia/Singapore");
+                                                        $dueDate = $result->DueDate;
+                                                        $now = date("Y-m-d h:i:s"); // status  date
 
-                                                    <?php } else {
-                                                        echo htmlentities($result->fine);
-                                                    }
+                                                        $dteStart = new DateTime($dueDate);
+                                                        $dteEnd   = new DateTime($now);
+
+                                                        $dteDiff  = $dteStart->diff($dteEnd);
+                                                        $fine = (int) $dteDiff->format("%R%a") * 25;
+                                                        
+                                                        echo $fine;
                                                     ?>
                                                 </div>
                                                 <?php if ($result->RetrunStatus == 0) { ?>
