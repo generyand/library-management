@@ -93,7 +93,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                     </div>
                     <div class="row">
-                        <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                             <div class=" panel panel-info">
                                 <div class="panel-heading">
                                     Issued Book Details
@@ -102,7 +102,20 @@ if (strlen($_SESSION['alogin']) == 0) {
                                     <form role="form" method="post">
                                         <?php
                                         $rid = intval($_GET['rid']);
-                                        $sql = "SELECT tblstudents.FullName,tblbooks.BookName,tblbooks.ISBNNumber,tblissuedbookdetails.IssuesDate,tblissuedbookdetails.ReturnDate,tblissuedbookdetails.id as rid,tblissuedbookdetails.fine,tblissuedbookdetails.RetrunStatus from  tblissuedbookdetails join tblstudents on tblstudents.StudentId=tblissuedbookdetails.StudentId join tblbooks on tblbooks.id=tblissuedbookdetails.BookId where tblissuedbookdetails.id=:rid";
+                                        $sql = "
+                                            
+                                        SELECT tblstudents.FullName,
+                                            tblbooks.BookName,
+                                            tblbooks.ISBNNumber,
+                                            tblissuedbookdetails.IssuesDate,
+                                            tblissuedbookdetails.DueDate,
+                                            tblissuedbookdetails.ReturnDate,
+                                            tblissuedbookdetails.id as rid,
+                                            tblissuedbookdetails.fine,
+                                            tblissuedbookdetails.RetrunStatus
+                                        FROM tblissuedbookdetails JOIN tblstudents ON tblstudents.StudentId=tblissuedbookdetails.StudentId
+                                        JOIN tblbooks ON tblbooks.id=tblissuedbookdetails.BookId
+                                        WHERE tblissuedbookdetails.id=:rid";
                                         $query = $dbh->prepare($sql);
                                         $query->bindParam(':rid', $rid, PDO::PARAM_STR);
                                         $query->execute();
@@ -115,31 +128,36 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 
                                                 <div class="form-group">
-                                                    <label>Student Name :</label>
+                                                    <label>Student Name:</label>
                                                     <?php echo htmlentities($result->FullName); ?>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Book Name :</label>
+                                                    <label>Book Name:</label>
                                                     <?php echo htmlentities($result->BookName); ?>
                                                 </div>
 
 
                                                 <div class="form-group">
-                                                    <label>ISBN :</label>
+                                                    <label>ISBN:</label>
                                                     <?php echo htmlentities($result->ISBNNumber); ?>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Book Issued Date :</label>
+                                                    <label>Book Issued Date:</label>
                                                     <?php echo htmlentities($result->IssuesDate); ?>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Book Due Date:</label>
+                                                    <?php echo htmlentities($result->DueDate); ?>
                                                 </div>
 
 
                                                 <div class="form-group">
-                                                    <label>Book Returned Date :</label>
+                                                    <label>Book Returned Date:</label>
                                                     <?php if ($result->ReturnDate == "") {
-                                                        echo htmlentities("Not Return Yet");
+                                                        echo htmlentities("Not Returned Yet");
                                                     } else {
 
 
