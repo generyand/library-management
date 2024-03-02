@@ -78,11 +78,11 @@ if (isset($_POST['login'])) {
               <form role="form" method="post">
 
                 <div class="form-group">
-                  <label>Enter Email id</label>
+                  <label>Enter Email</label>
                   <input class="form-control" type="text" name="emailid" required autocomplete="off" />
                 </div>
                 <div class="form-group">
-                  <label>Password</label>
+                  <label>Enter Password</label>
                   <input class="form-control" type="password" name="password" required autocomplete="off" />
                   <p class="help-block"><a href="user-forgot-password.php">Forgot Password</a></p>
                 </div>
@@ -92,7 +92,8 @@ if (isset($_POST['login'])) {
                   <input type="text" class="form-control1" name="vercode" maxlength="5" autocomplete="off" required style="height:25px;" />&nbsp;<img src="captcha.php">
                 </div> -->
 
-                <button type="submit" name="login" class="btn btn-info">LOGIN </button> | <a href="signup.php">Not Register Yet</a>
+                <button type="submit" name="login" class="btn btn-info">LOGIN</button>
+                <span>| Not Registered Yet? <a href="signup.php">Register Here</a></span> 
               </form>
             </div>
           </div>
