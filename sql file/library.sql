@@ -175,11 +175,11 @@ CREATE TABLE `tblstudents` (
 --
 
 INSERT INTO `tblstudents` (`id`, `StudentId`, `FullName`, `EmailId`, `MobileNumber`, `Password`, `Status`, `RegDate`, `UpdationDate`) VALUES
-(1, 'SID002', 'Gene Ryan Depalubos', 'depalubos@gmail.com', '09986359674', 'f925916e2754e5e03f75dd58a5733251', 1, '2017-07-11 15:37:05', '2024-02-21 07:39:22'),
-(4, 'SID005', 'Vincent Ace Rivera', 'rivera@gmail.com', '09932072911', '92228410fc8b872914e023160cf4ae8f', 0, '2017-07-11 15:41:27', '2024-02-27 07:55:53'),
-(8, 'SID009', 'Asnari Pacalna', 'pacalna@gmail.com', '09151494842', 'f925916e2754e5e03f75dd58a5733251', 1, '2017-07-11 15:58:28', '2024-02-21 07:39:33'),
-(9, 'SID010', 'Fernyl Jean Maningo', 'maningo@gmail.com', '09582377313', 'f925916e2754e5e03f75dd58a5733251', 1, '2017-07-15 13:40:30', '2024-02-21 07:39:38'),
-(10, 'SID011', 'Rogene Carl Rosalijos', 'rosalijos@gmail.com', '09419167578', 'f925916e2754e5e03f75dd58a5733251', 1, '2017-07-15 18:00:59', '2024-02-21 07:39:47'),
+(1, 'SID002', 'Gene Ryan Depalubos', 'depalubos@gmail.com', '09986359674', 'f925916e2754e5e03f75dd58a5733251', 1, '2024-02-11 15:37:05', '2024-02-21 07:39:22'),
+(4, 'SID005', 'Vincent Ace Rivera', 'rivera@gmail.com', '09932072911', '92228410fc8b872914e023160cf4ae8f', 0, '2024-02-11 15:41:27', '2024-02-27 07:55:53'),
+(8, 'SID009', 'Asnari Pacalna', 'pacalna@gmail.com', '09151494842', 'f925916e2754e5e03f75dd58a5733251', 1, '2024-02-11 15:58:28', '2024-02-21 07:39:33'),
+(9, 'SID010', 'Fernyl Jean Maningo', 'maningo@gmail.com', '09582377313', 'f925916e2754e5e03f75dd58a5733251', 1, '2024-02-15 13:40:30', '2024-02-21 07:39:38'),
+(10, 'SID011', 'Rogene Carl Rosalijos', 'rosalijos@gmail.com', '09419167578', 'f925916e2754e5e03f75dd58a5733251', 1, '2024-02-15 18:00:59', '2024-02-21 07:39:47'),
 (11, 'SID013', 'Allan Corpuz', 'corpuz@gmail.com', '09755683328', 'f925916e2754e5e03f75dd58a5733251', 1, '2024-02-21 07:43:17', '2024-02-21 07:45:31'),
 (12, 'SID014', 'Renz Ivan Polancos', 'polancos@gmail.com', '09511228486', 'f925916e2754e5e03f75dd58a5733251', 1, '2024-02-21 07:44:23', '2024-02-21 07:45:39');
 
