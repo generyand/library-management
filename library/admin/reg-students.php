@@ -10,7 +10,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     if (isset($_GET['inid'])) {
         $id = $_GET['inid'];
         $status = 0;
-        $sql = "update tblstudents set Status=:status  WHERE id=:id";
+        $sql = "UPDATE tblstudents SET Status=:status  WHERE id=:id";
         $query = $dbh->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->bindParam(':status', $status, PDO::PARAM_STR);
@@ -29,8 +29,6 @@ if (strlen($_SESSION['alogin']) == 0) {
         $query->execute();
         header('location:reg-students.php');
     }
-
-
 ?>
     <!DOCTYPE html>
     <html xmlns="http://www.w3.org/1999/xhtml">
@@ -110,10 +108,10 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                                             ?></td>
                                                         <td class="center">
                                                             <?php if ($result->Status == 1) { ?>
-                                                                <a href="reg-students.php?inid=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to block this student?');"" >  <button class=" btn btn-danger"> Inactive</button>
+                                                                <a href="reg-students.php?inid=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to block this student?');"> <button class=" btn btn-danger">Deactivate</button>
                                                                 <?php } else { ?>
 
-                                                                    <a href="reg-students.php?id=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to active this student?');""><button class=" btn btn-primary"> Active</button>
+                                                                    <a href="reg-students.php?id=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to active this student?');"><button class=" btn btn-primary">Activate</button>
                                                                     <?php } ?>
 
                                                         </td>

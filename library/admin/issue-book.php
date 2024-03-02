@@ -95,7 +95,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                     </div>
 
                     <div class="row">
-                        <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                             <div class=" panel panel-info">
                                 <div class="panel-heading">
                                     Issue a New Book
@@ -104,7 +104,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                     <form role="form" method="post">
 
                                         <div class="form-group">
-                                            <label>Student ID<span style="color:red;">*</span></label>
+                                            <label>Student ID <span style="color:red;">*</span></label>
                                             <input class="form-control" type="text" name="studentid" id="studentid" onBlur="getstudent()" autocomplete="off" required />
                                         </div>
 
@@ -114,7 +114,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 
                                         <div class="form-group">
-                                            <label>ISBN No.<span style="color:red;">*</span></label>
+                                            <label>ISBN No. <span style="color:red;">*</span></label>
                                             <input class="form-control" type="text" name="booikid" id="bookid" onBlur="getbook()" required="required" />
                                         </div>
 
