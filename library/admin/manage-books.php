@@ -11,7 +11,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         $query = $dbh->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
-        $_SESSION['delmsg'] = "Category deleted scuccessfully ";
+        $_SESSION['delmsg'] = "Book deleted successfully ";
         header('location:manage-books.php');
     }
 ?>
@@ -27,7 +27,13 @@ if (strlen($_SESSION['alogin']) == 0) {
         <!-- BOOTSTRAP CORE STYLE  -->
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
         <!-- FONT AWESOME STYLE  -->
-        <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- <link href="assets/css/font-awesome.css" rel="stylesheet" /> -->
+        <link
+            rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer" />
         <!-- DATATABLE STYLE  -->
         <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
         <!-- CUSTOM STYLE  -->
@@ -51,7 +57,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                         <?php if ($_SESSION['error'] != "") { ?>
                             <div class="col-md-6">
                                 <div class="alert alert-danger">
-                                    <strong>Error :</strong>
+                                    <strong>Error:</strong>
                                     <?php echo htmlentities($_SESSION['error']); ?>
                                     <?php echo htmlentities($_SESSION['error'] = ""); ?>
                                 </div>
@@ -60,7 +66,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                         <?php if ($_SESSION['msg'] != "") { ?>
                             <div class="col-md-6">
                                 <div class="alert alert-success">
-                                    <strong>Success :</strong>
+                                    <strong>Success:</strong>
                                     <?php echo htmlentities($_SESSION['msg']); ?>
                                     <?php echo htmlentities($_SESSION['msg'] = ""); ?>
                                 </div>
@@ -104,13 +110,23 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                 <th>Book Name</th>
                                                 <th>Category</th>
                                                 <th>Author</th>
-                                                <th>ISBN</th>
-                                                <!-- <th>Price</th> -->
-                                                <th>Action</th>
+                                                <th style="text-align: center;">ISBN</th>
+                                                <th style="text-align: center;">Status</th>
+                                                <th style="text-align: center;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $sql = "SELECT tblbooks.BookName,tblcategory.CategoryName,tblauthors.AuthorName,tblbooks.ISBNNumber,tblbooks.BookPrice,tblbooks.id as bookid from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId";
+                                            <?php $sql = "
+                                                    SELECT 
+                                                        tblbooks.BookName,
+                                                        tblcategory.CategoryName,
+                                                        tblauthors.AuthorName,
+                                                        tblbooks.ISBNNumber,
+                                                        tblbooks.id as bookid,
+                                                        tblbooks.status
+                                                    FROM tblbooks 
+                                                    JOIN tblcategory ON tblcategory.id=tblbooks.CatId 
+                                                    JOIN tblauthors ON tblauthors.id=tblbooks.AuthorId";
                                             $query = $dbh->prepare($sql);
                                             $query->execute();
                                             $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -122,10 +138,16 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                         <td class="center"><?php echo htmlentities($result->BookName); ?></td>
                                                         <td class="center"><?php echo htmlentities($result->CategoryName); ?></td>
                                                         <td class="center"><?php echo htmlentities($result->AuthorName); ?></td>
-                                                        <td class="center"><?php echo htmlentities($result->ISBNNumber); ?></td>
-                                                        <td class="center">
-                                                            <a href="edit-book.php?bookid=<?php echo htmlentities($result->bookid); ?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button>
-                                                                <a href="manage-books.php?del=<?php echo htmlentities($result->bookid); ?>" onclick="return confirm('Are you sure you want to delete?');"" >  <button class=" btn btn-danger"><i class="fa fa-pencil"></i> Delete</button>
+                                                        <td style="text-align: center;" class="center"><?php echo htmlentities($result->ISBNNumber); ?></td>
+                                                        <td style="text-align: center;" class="center"><?php if ($result->status == 1) { ?>
+                                                                <a href="#" class="btn btn-success btn-s">Available</a>
+                                                            <?php } else { ?>
+                                                                <a href="#" class="btn btn-danger btn-s">Unavailable</a>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td style="text-align: center;" class="center">
+                                                            <a href="edit-book.php?bookid=<?php echo htmlentities($result->bookid); ?>"><button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                                                                <a href="manage-books.php?del=<?php echo htmlentities($result->bookid); ?>" onclick="return confirm('Are you sure you want to delete?');"> <button class=" btn btn-danger"><i class="fa fa-trash"></i></button>
                                                         </td>
                                                     </tr>
                                             <?php $cnt = $cnt + 1;

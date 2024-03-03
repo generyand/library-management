@@ -9,10 +9,15 @@ if (strlen($_SESSION['alogin']) == 0) {
     if (isset($_POST['issue'])) {
         $studentid = strtoupper($_POST['studentid']);
         $bookid = $_POST['bookdetails'];
-        $sql = "INSERT INTO tblissuedbookdetails(StudentID,BookId,IssuesDate, DueDate) VALUES(:studentid,:bookid,CURRENT_TIMESTAMP(), DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 2 DAY))";
+        $ISBN = $_POST['ISBN'];
+        $sql = "
+            INSERT INTO tblissuedbookdetails(StudentID,BookId,IssuesDate, DueDate) 
+            VALUES(:studentid,:bookid,CURRENT_TIMESTAMP(), DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 2 DAY));
+            UPDATE tblbooks SET status = 0 WHERE ISBNNumber = :ISBN";
         $query = $dbh->prepare($sql);
         $query->bindParam(':studentid', $studentid, PDO::PARAM_STR);
         $query->bindParam(':bookid', $bookid, PDO::PARAM_STR);
+        $query->bindParam(':ISBN', $ISBN, PDO::PARAM_STR);
         $query->execute();
         $lastInsertId = $dbh->lastInsertId();
         if ($lastInsertId) {
@@ -115,7 +120,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                                         <div class="form-group">
                                             <label>ISBN No. <span style="color:red;">*</span></label>
-                                            <input class="form-control" type="text" name="booikid" id="bookid" onBlur="getbook()" required="required" />
+                                            <input class="form-control" type="text" name="ISBN" id="bookid" onBlur="getbook()" required="required" />
                                         </div>
 
                                         <div class="form-group">
