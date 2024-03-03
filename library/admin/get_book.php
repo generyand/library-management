@@ -24,7 +24,6 @@ if (!empty($_POST["bookid"])) {
       }
     }
   } else { ?>
-
     <option class="others">Invalid ISBN Number</option>
 <?php
     echo "<script>$('#submit').prop('disabled',true);</script>";
