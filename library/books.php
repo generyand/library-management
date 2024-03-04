@@ -106,7 +106,7 @@ if (strlen($_SESSION['login']) == 0) {
                                                 <th>Author</th>
                                                 <th>ISBN</th>
                                                 <!-- <th>Price</th> -->
-                                                <th>Status</th>
+                                                <th style="text-align: center;">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -132,7 +132,7 @@ if (strlen($_SESSION['login']) == 0) {
                                                         <td class="center"><?php echo htmlentities($result->CategoryName); ?></td>
                                                         <td class="center"><?php echo htmlentities($result->AuthorName); ?></td>
                                                         <td class="center"><?php echo htmlentities($result->ISBNNumber); ?></td>
-                                                        <td class="center"><?php if ($result->status == 1) { ?>
+                                                        <td style="text-align: center;" class="center"><?php if ($result->status == 1) { ?>
                                                                 <a href="#" class="btn btn-success btn-x">Available</a>
                                                             <?php } else { ?>
                                                                 <a href="#" class="btn btn-danger btn-x">Unavailable</a>
